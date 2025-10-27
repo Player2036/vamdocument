@@ -25,7 +25,7 @@ export function ContactForm({ t }: ContactFormProps) {
   const [consentChecked, setConsentChecked] = useState(false);
 
   // ✅ Прямая ссылка на твою форму Formspree
-  const formspreeEndpoint = 'https://formspree.io/f/mzzkdvne';
+  const formspreeEndpoint = 'https://formspree.io/f/mzzkdadz';
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
