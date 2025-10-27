@@ -1,6 +1,6 @@
 'use client';
 
-import { RefreshCw, AlertTriangle, User, Clock, Edit2 } from 'lucide-react';
+import { RefreshCw, AlertTriangle, User, Clock, Edit2, Scale, FileText } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface ServicesProps {
@@ -33,6 +33,24 @@ export function Services({ t }: ServicesProps) {
       icon: Edit2,
       title: t.services.correction.title,
       description: t.services.correction.description,
+    },
+
+    // 🟦 Новая карточка 1 — Судовые документы
+    {
+      icon: Scale,
+      title: t.services.courtDocs?.title || 'Судовые документы',
+      description:
+        t.services.courtDocs?.description ||
+        'Процедуры дистанционного выпуска за решением суда и развивания шлюпу.',
+    },
+
+    // 🟨 Новая карточка 2 — Свидетельство
+    {
+      icon: FileText,
+      title: t.services.certificate?.title || 'Свидетельство',
+      description:
+        t.services.certificate?.description ||
+        'Получение и замена свидетельств (о рождении, браке, разводе и других документах).',
     },
   ];
 
