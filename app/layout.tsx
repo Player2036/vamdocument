@@ -3,6 +3,27 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from '@/components/ui/sonner';
 
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'vamdocument.com',
+  legalName: 'VamDocument',
+  url: 'https://vamdocument.com',
+  logo: 'https://vamdocument.com/og-image.jpg',
+  sameAs: [
+    'https://www.facebook.com/vamdocument',
+    'https://www.instagram.com/vamdocument',
+    'https://t.me/vamdocument',
+  ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer support',
+    email: 'hello@vamdocument.com',
+    areaServed: 'UA',
+    availableLanguage: ['Russian', 'Ukrainian', 'English'],
+  },
+};
+
 const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
 export const metadata: Metadata = {
@@ -46,6 +67,10 @@ export default function RootLayout({
       <body className={inter.className}>
         {children}
         <Toaster position="top-center" richColors />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
       </body>
     </html>
   );

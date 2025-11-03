@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Locale } from '@/lib/i18n';
@@ -13,6 +15,8 @@ interface HeaderProps {
 export function Header({ locale, onLocaleChange, t }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,6 +35,24 @@ export function Header({ locale, onLocaleChange, t }: HeaderProps) {
     }
   };
 
+  const handleSectionNavigation = (id: string) => {
+    if (pathname === '/') {
+      scrollToSection(id);
+    } else {
+      router.push(`/#${id}`);
+      setIsMenuOpen(false);
+    }
+  };
+
+  const handleHomeNavigation = () => {
+    if (pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      router.push('/');
+      setIsMenuOpen(false);
+    }
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -41,7 +63,7 @@ export function Header({ locale, onLocaleChange, t }: HeaderProps) {
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
             <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={handleHomeNavigation}
               className="text-xl sm:text-2xl font-bold text-ua-blue hover:opacity-80 transition-opacity"
             >
               {t.brand}
@@ -50,25 +72,41 @@ export function Header({ locale, onLocaleChange, t }: HeaderProps) {
 
           <nav className="hidden md:flex items-center space-x-8">
             <button
-              onClick={() => scrollToSection('services')}
+              onClick={() => handleSectionNavigation('services')}
               className="text-gray-700 hover:text-ua-blue transition-colors font-medium"
             >
               {t.nav.services}
             </button>
-            <button
-              onClick={() => scrollToSection('documents')}
+            <Link
+              href="/how-it-works"
+              onClick={() => setIsMenuOpen(false)}
               className="text-gray-700 hover:text-ua-blue transition-colors font-medium"
             >
-              {t.nav.documents}
-            </button>
-            <button
-              onClick={() => scrollToSection('faq')}
+              {t.nav.howItWorks}
+            </Link>
+            <Link
+              href="/faq"
+              onClick={() => setIsMenuOpen(false)}
               className="text-gray-700 hover:text-ua-blue transition-colors font-medium"
             >
               {t.nav.faq}
-            </button>
+            </Link>
+            <Link
+              href="/blog"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-gray-700 hover:text-ua-blue transition-colors font-medium"
+            >
+              {t.nav.blog}
+            </Link>
+            <Link
+              href="/reviews"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-gray-700 hover:text-ua-blue transition-colors font-medium"
+            >
+              {t.nav.reviews}
+            </Link>
             <button
-              onClick={() => scrollToSection('contact')}
+              onClick={() => handleSectionNavigation('contact')}
               className="text-gray-700 hover:text-ua-blue transition-colors font-medium"
             >
               {t.nav.contact}
@@ -112,25 +150,41 @@ export function Header({ locale, onLocaleChange, t }: HeaderProps) {
         <div className="md:hidden bg-white border-t border-gray-200">
           <nav className="px-4 py-4 space-y-3">
             <button
-              onClick={() => scrollToSection('services')}
+              onClick={() => handleSectionNavigation('services')}
               className="block w-full text-left px-4 py-2 text-gray-700 hover:text-ua-blue hover:bg-gray-50 rounded-md transition-colors font-medium"
             >
               {t.nav.services}
             </button>
-            <button
-              onClick={() => scrollToSection('documents')}
+            <Link
+              href="/how-it-works"
+              onClick={() => setIsMenuOpen(false)}
               className="block w-full text-left px-4 py-2 text-gray-700 hover:text-ua-blue hover:bg-gray-50 rounded-md transition-colors font-medium"
             >
-              {t.nav.documents}
-            </button>
-            <button
-              onClick={() => scrollToSection('faq')}
+              {t.nav.howItWorks}
+            </Link>
+            <Link
+              href="/faq"
+              onClick={() => setIsMenuOpen(false)}
               className="block w-full text-left px-4 py-2 text-gray-700 hover:text-ua-blue hover:bg-gray-50 rounded-md transition-colors font-medium"
             >
               {t.nav.faq}
-            </button>
+            </Link>
+            <Link
+              href="/blog"
+              onClick={() => setIsMenuOpen(false)}
+              className="block w-full text-left px-4 py-2 text-gray-700 hover:text-ua-blue hover:bg-gray-50 rounded-md transition-colors font-medium"
+            >
+              {t.nav.blog}
+            </Link>
+            <Link
+              href="/reviews"
+              onClick={() => setIsMenuOpen(false)}
+              className="block w-full text-left px-4 py-2 text-gray-700 hover:text-ua-blue hover:bg-gray-50 rounded-md transition-colors font-medium"
+            >
+              {t.nav.reviews}
+            </Link>
             <button
-              onClick={() => scrollToSection('contact')}
+              onClick={() => handleSectionNavigation('contact')}
               className="block w-full text-left px-4 py-2 text-gray-700 hover:text-ua-blue hover:bg-gray-50 rounded-md transition-colors font-medium"
             >
               {t.nav.contact}
