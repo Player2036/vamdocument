@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from '@/components/ui/sonner';
+import { TikTokPixel } from '@/components/TikTokPixel';
 
 const organizationJsonLd = {
   '@context': 'https://schema.org',
@@ -67,6 +68,7 @@ export default function RootLayout({
       <body className={inter.className}>
         {children}
         <Toaster position="top-center" richColors />
+        <TikTokPixel />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}

@@ -28,11 +28,9 @@ export function generateMetadata({ params }: PageProps): Metadata {
       description: post.seoDescription.ru,
       type: 'article',
       url: `https://vamdocument.com/blog/${post.slug}`,
-      article: {
-        publishedTime: post.publishedAt,
-        modifiedTime: post.updatedAt,
-        tags: post.tags,
-      },
+      publishedTime: post.publishedAt,
+      modifiedTime: post.updatedAt,
+      tags: post.tags,
     },
     twitter: {
       card: 'summary_large_image',
