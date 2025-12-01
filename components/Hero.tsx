@@ -37,15 +37,15 @@ export function Hero({ t }: HeroProps) {
             </Button>
           </div>
 
-          <div className="flex-shrink-0 relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+          <div className="flex-shrink-0 relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 mt-8 lg:mt-0">
             <div className="absolute inset-0 bg-gradient-to-br from-ua-blue/10 to-ua-yellow/10 rounded-full blur-3xl" />
-            <div className="relative flex items-center justify-center h-full">
+            <div className="relative flex items-center justify-center h-full w-full">
               <Image
                 src="/hero-new.jpg"
                 alt="Happy person with Ukrainian driver license"
                 width={600}
                 height={400}
-                className="w-full h-auto rounded-xl object-cover"
+                className="w-full h-full rounded-xl object-cover"
               />
             </div>
           </div>
