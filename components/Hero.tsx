@@ -1,6 +1,6 @@
 'use client';
 
-import { CreditCard, FileText } from 'lucide-react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 
 interface HeroProps {
@@ -40,14 +40,13 @@ export function Hero({ t }: HeroProps) {
           <div className="flex-shrink-0 relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
             <div className="absolute inset-0 bg-gradient-to-br from-ua-blue/10 to-ua-yellow/10 rounded-full blur-3xl" />
             <div className="relative flex items-center justify-center h-full">
-              <div className="relative">
-                <div className="bg-white p-8 rounded-2xl shadow-2xl border-2 border-ua-blue/20 transform rotate-6 hover:rotate-3 transition-transform duration-300">
-                  <CreditCard size={80} className="text-ua-blue" />
-                </div>
-                <div className="absolute -bottom-4 -right-4 bg-white p-6 rounded-xl shadow-xl border-2 border-ua-yellow/40 transform -rotate-12 hover:-rotate-6 transition-transform duration-300">
-                  <FileText size={48} className="text-ua-yellow" />
-                </div>
-              </div>
+              <Image
+                src="/hero-new.jpg"
+                alt="Happy person with Ukrainian driver license"
+                width={600}
+                height={400}
+                className="w-full h-auto rounded-xl object-cover"
+              />
             </div>
           </div>
         </div>
