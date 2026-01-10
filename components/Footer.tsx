@@ -84,6 +84,25 @@ export function Footer({ t }: FooterProps) {
             </a>
           </div>
 
+          <div className="flex flex-wrap justify-center gap-3">
+            <a
+              href="https://wa.me/359887366613"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20BA5A] text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 text-sm sm:text-base"
+            >
+              WhatsApp
+            </a>
+            <a
+              href="https://www.tiktok.com/@sergey.bulgarian?_r=1&_t=ZN-92s7QzofsCU"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center bg-gray-800 hover:bg-gray-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 text-sm sm:text-base"
+            >
+              TikTok
+            </a>
+          </div>
+
           <div className="pt-6 border-t border-gray-800 w-full max-w-2xl">
             <p className="text-sm text-gray-500">vamdocument.com</p>
           </div>

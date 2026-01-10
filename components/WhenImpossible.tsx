@@ -9,7 +9,6 @@ interface WhenImpossibleProps {
 
 export function WhenImpossible({ t }: WhenImpossibleProps) {
   const limitations = [
-    t.whenImpossible.noRegistration,
     t.whenImpossible.alimony,
     t.whenImpossible.debtCollection,
   ];

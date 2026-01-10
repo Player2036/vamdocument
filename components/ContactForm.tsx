@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -23,6 +24,7 @@ interface ContactFormProps {
 export function ContactForm({ t }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [consentChecked, setConsentChecked] = useState(false);
+  const router = useRouter();
 
   // ✅ Прямая ссылка на твою форму Formspree
   const formspreeEndpoint = 'https://formspree.io/f/xeopeldy';
@@ -51,6 +53,7 @@ export function ContactForm({ t }: ContactFormProps) {
         toast.success(t.contactForm.success || 'Заявка успешно отправлена!');
         (e.target as HTMLFormElement).reset();
         setConsentChecked(false);
+        router.push('/thank-you');
       } else {
         throw new Error('Form submission failed');
       }
