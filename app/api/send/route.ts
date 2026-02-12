@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+export const runtime = 'nodejs';
+
 const MAX_BODY_SIZE = 10 * 1024; // 10KB
 const MAX_NAME = 100;
 const MAX_PHONE = 50;
@@ -172,11 +174,16 @@ export async function POST(request: NextRequest) {
         text: htmlMessage,
         parse_mode: 'HTML',
       }),
+      cache: 'no-store',
     });
 
     if (!telegramResponse.ok) {
-      const errText = await telegramResponse.text();
-      console.error('Telegram API error:', telegramResponse.status, errText);
+      const telegramError = await telegramResponse.text();
+      console.error(
+        'Telegram API error:',
+        'status=' + telegramResponse.status,
+        'body=' + telegramError
+      );
       return NextResponse.json(
         { success: false },
         { status: 500 }
