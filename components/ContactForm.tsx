@@ -24,10 +24,8 @@ interface ContactFormProps {
 export function ContactForm({ t }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [consentChecked, setConsentChecked] = useState(false);
+  const [requestType, setRequestType] = useState('');
   const router = useRouter();
-
-  // ✅ Прямая ссылка на твою форму Formspree
-  const formspreeEndpoint = 'https://formspree.io/f/xeopeldy';
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,22 +35,48 @@ export function ContactForm({ t }: ContactFormProps) {
       return;
     }
 
+    if (!requestType?.trim()) {
+      toast.error(t.contactForm.requestType || 'Выберите тип обращения');
+      return;
+    }
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const name = (formData.get('name') as string)?.trim() || '';
+    const phone = (formData.get('phone') as string)?.trim() || '';
+    const email = (formData.get('email') as string)?.trim() || '';
+    const country = (formData.get('country') as string)?.trim() || '';
+    const comment = (formData.get('comment') as string)?.trim() || '';
+    const company = (formData.get('company') as string)?.trim() || '';
+
+    const messageParts: string[] = [];
+    if (requestType) messageParts.push(`Тип обращения: ${requestType}`);
+    if (country) messageParts.push(`Страна: ${country}`);
+    if (comment) messageParts.push(`Комментарий: ${comment}`);
+    const message = messageParts.join('\n') || '-';
+
     setIsSubmitting(true);
 
     try {
-      const formData = new FormData(e.currentTarget);
-      const response = await fetch(formspreeEndpoint, {
+      const response = await fetch('/api/send', {
         method: 'POST',
-        body: formData,
-        headers: {
-          Accept: 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          phone,
+          email,
+          message,
+          company,
+        }),
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         toast.success(t.contactForm.success || 'Заявка успешно отправлена!');
-        (e.target as HTMLFormElement).reset();
+        form.reset();
         setConsentChecked(false);
+        setRequestType('');
         router.push('/thank-you');
       } else {
         throw new Error('Form submission failed');
@@ -74,7 +98,7 @@ export function ContactForm({ t }: ContactFormProps) {
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 lg:p-10 space-y-6 border-2 border-ua-blue/10"
+          className="relative bg-white rounded-2xl shadow-xl p-6 sm:p-8 lg:p-10 space-y-6 border-2 border-ua-blue/10"
         >
           {/* Имя и страна */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -131,10 +155,17 @@ export function ContactForm({ t }: ContactFormProps) {
                 id="phone"
                 name="phone"
                 type="tel"
+                required
                 placeholder="+49 175 ..."
                 className="border-2 border-gray-200 focus:border-ua-blue transition-colors"
               />
             </div>
+          </div>
+
+          {/* Honeypot - hidden from users */}
+          <div className="absolute -left-[9999px] w-1 h-1 overflow-hidden" aria-hidden="true">
+            <Label htmlFor="company">Company</Label>
+            <Input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
           </div>
 
           {/* Тип обращения */}
@@ -142,7 +173,12 @@ export function ContactForm({ t }: ContactFormProps) {
             <Label htmlFor="requestType" className="text-gray-700 font-medium">
               {t.contactForm.requestType || 'Тип обращения'}
             </Label>
-            <Select name="requestType" required>
+            <Select
+              name="requestType"
+              required
+              value={requestType}
+              onValueChange={setRequestType}
+            >
               <SelectTrigger className="border-2 border-gray-200 focus:border-ua-blue transition-colors">
                 <SelectValue placeholder="Выберите вариант..." />
               </SelectTrigger>
@@ -177,19 +213,6 @@ export function ContactForm({ t }: ContactFormProps) {
               rows={5}
               placeholder="Опишите ваш случай или задайте вопрос"
               className="border-2 border-gray-200 focus:border-ua-blue transition-colors resize-none"
-            />
-          </div>
-
-          {/* Загрузка файла */}
-          <div className="space-y-2">
-            <Label htmlFor="file" className="text-gray-700 font-medium">
-              {t.contactForm.upload || 'Загрузка файла (необязательно)'}
-            </Label>
-            <Input
-              id="file"
-              name="file"
-              type="file"
-              className="border-2 border-gray-200 focus:border-ua-blue transition-colors"
             />
           </div>
 
