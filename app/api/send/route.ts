@@ -141,6 +141,8 @@ export async function POST(request: NextRequest) {
     const token = process.env.TG_TOKEN;
     const chatId = process.env.TG_CHAT_ID;
 
+    console.log('TG_TOKEN:', process.env.TG_TOKEN);
+
     if (!token || !chatId) {
       console.error('TG_TOKEN or TG_CHAT_ID not configured');
       return NextResponse.json(
