@@ -18,7 +18,7 @@ export const POLAND_PHONE = {
  */
 export const CONTACT_LINKS = {
   whatsapp: 'https://wa.me/359887366613',
-  telegram: 'https://t.me/Sergeybularia',
+  telegram: 'https://t.me/Sergeybulgaria',
   viber: 'https://viber.click/359887366613',
   tiktok: 'https://www.tiktok.com/@sergey.bulgarian',
   instagram: 'https://instagram.com/vamdocument',
