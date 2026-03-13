@@ -2,7 +2,7 @@
 
 import { useLocale } from '@/hooks/useLocale';
 import { Header } from '@/components/Header';
-import { Hero } from '@/components/Hero';
+import { HomeHub } from '@/components/HomeHub';
 import { Steps } from '@/components/Steps';
 import { Services } from '@/components/Services';
 import { RequiredDocs } from '@/components/RequiredDocs';
@@ -29,13 +29,15 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <Header locale={locale} onLocaleChange={changeLocale} t={t} />
       <main>
-        <Hero t={t} />
-        <Steps t={t} />
-        <Services t={t} />
-        <RequiredDocs t={t} />
-        <WhenImpossible t={t} />
-        <FAQ t={t} locale={locale} />
-        <ContactForm t={t} />
+        <HomeHub t={t} />
+        <section id="ukraine-service">
+          <Steps t={t} />
+          <Services t={t} />
+          <RequiredDocs t={t} />
+          <WhenImpossible t={t} />
+          <FAQ t={t} locale={locale} />
+          <ContactForm t={t} />
+        </section>
       </main>
       <Footer t={t} />
     </div>

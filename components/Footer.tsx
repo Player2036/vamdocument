@@ -3,6 +3,7 @@
 import type { MouseEvent } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { ContactIcons } from '@/components/ContactIcons';
 
 interface FooterProps {
   t: any;
@@ -27,81 +28,72 @@ export function Footer({ t }: FooterProps) {
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center text-center space-y-6">
-          <p className="text-lg text-gray-300 max-w-2xl leading-relaxed">
-            {t.footer.copyright}
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-400">
+        <div className="flex flex-col items-center text-center space-y-8">
+          {/* Navigation */}
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+            <Link
+              href="/"
+              className="text-gray-400 hover:text-white transition-colors font-medium"
+            >
+              {t.footer?.navReplacement ?? t.nav?.replacement ?? 'Замена / восстановление прав'}
+            </Link>
+            <Link
+              href="/poland"
+              className="text-gray-400 hover:text-white transition-colors font-medium"
+            >
+              {t.footer?.navPoland ?? t.nav?.poland ?? 'Получение прав в Польше'}
+            </Link>
             <Link
               href="/how-it-works"
-              className="hover:text-white transition-colors underline underline-offset-4"
+              className="text-gray-400 hover:text-white transition-colors"
             >
-              {t.nav?.howItWorks || 'Как это работает'}
+              {t.nav?.howItWorks}
             </Link>
-            <span className="text-gray-600">•</span>
             <Link
               href="/faq"
-              className="hover:text-white transition-colors underline underline-offset-4"
+              className="text-gray-400 hover:text-white transition-colors"
             >
-              {t.nav?.faq || 'Вопросы'}
+              {t.nav?.faq}
             </Link>
-            <span className="text-gray-600">•</span>
             <Link
               href="/blog"
-              className="hover:text-white transition-colors underline underline-offset-4"
+              className="text-gray-400 hover:text-white transition-colors"
             >
-              {t.nav?.blog || 'Центр информации'}
+              {t.nav?.blog}
             </Link>
-            <span className="text-gray-600">•</span>
             <Link
               href="/reviews"
-              className="hover:text-white transition-colors underline underline-offset-4"
+              className="text-gray-400 hover:text-white transition-colors"
             >
-              {t.nav?.reviews || 'Отзывы'}
+              {t.nav?.reviews}
             </Link>
-            <span className="text-gray-600">•</span>
             <Link
               href="/about"
-              className="hover:text-white transition-colors underline underline-offset-4"
+              className="text-gray-400 hover:text-white transition-colors"
             >
-              {t.pages?.about?.title || 'О компании'}
+              {t.pages?.about?.title}
             </Link>
-            <span className="text-gray-600">•</span>
             <Link
               href="/licenses"
-              className="hover:text-white transition-colors underline underline-offset-4"
+              className="text-gray-400 hover:text-white transition-colors"
             >
-              {t.pages?.licenses?.title || 'Документы'}
+              {t.pages?.licenses?.title}
             </Link>
-            <span className="text-gray-600">•</span>
             <a
               href="#contact"
               onClick={handleContactClick}
-              className="hover:text-white transition-colors underline underline-offset-4"
+              className="text-gray-400 hover:text-white transition-colors"
             >
-              {t.nav?.contact || t.footer.contacts}
+              {t.nav?.contact ?? t.footer?.contacts}
             </a>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-3">
-            <a
-              href="https://wa.me/359887366613"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20BA5A] text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 text-sm sm:text-base"
-            >
-              WhatsApp
-            </a>
-            <a
-              href="https://www.tiktok.com/@sergey.bulgarian?_r=1&_t=ZN-92s7QzofsCU"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center bg-gray-800 hover:bg-gray-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 text-sm sm:text-base"
-            >
-              TikTok
-            </a>
-          </div>
+          {/* Contacts (WhatsApp, Telegram, Viber) + Social (TikTok, Instagram) — icons */}
+          <ContactIcons />
+
+          <p className="text-lg text-gray-300 max-w-2xl leading-relaxed">
+            {t.footer.copyright}
+          </p>
 
           <div className="pt-6 border-t border-gray-800 w-full max-w-2xl">
             <p className="text-sm text-gray-500">vamdocument.com</p>

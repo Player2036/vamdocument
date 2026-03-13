@@ -12,3 +12,14 @@ export const POLAND_PHONE = {
   /** Telegram t.me URL */
   telegram: 'https://t.me/+48880742561',
 } as const;
+
+/**
+ * Main contact links (Header, Footer, Floating block)
+ */
+export const CONTACT_LINKS = {
+  whatsapp: 'https://wa.me/359887366613',
+  telegram: 'https://t.me/Sergeybularia',
+  viber: 'https://viber.click/359887366613',
+  tiktok: 'https://www.tiktok.com/@sergey.bulgarian',
+  instagram: 'https://instagram.com/vamdocument',
+} as const;

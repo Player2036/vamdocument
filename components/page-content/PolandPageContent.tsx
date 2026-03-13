@@ -1,6 +1,7 @@
 'use client';
 
 import { Check, MessageCircle } from 'lucide-react';
+import { ContactIcons } from '@/components/ContactIcons';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -85,74 +86,34 @@ export function PolandPageContent({ locale, t }: PolandPageContentProps) {
 
   return (
     <>
-      {/* 1. Hero */}
+      {/* 1. Hero — short first screen */}
       <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-20 overflow-hidden">
-        {/* Mobile: light gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 via-white to-white lg:hidden" />
-        {/* Desktop: background image (right side) */}
-        <div className="absolute inset-0 hidden bg-no-repeat bg-cover bg-right lg:block lg:bg-[url('/poland-hero-desktop.png.png')]" />
-        {/* Desktop: gradient overlay for text readability */}
-        <div className="absolute inset-0 hidden bg-gradient-to-r from-white/95 via-white/80 to-transparent lg:block" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
-            <div className="max-w-xl">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
-              {p.hero.headline}
-            </h1>
-            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed mb-8">
-              {p.hero.subheadline}
-            </p>
-            <ul className="space-y-4 mb-8">
-              {p.hero.bullets.map((item: string, i: number) => (
-                <li key={i} className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-6 h-6 bg-ua-blue rounded-full flex items-center justify-center mt-0.5">
-                    <Check size={16} className="text-white" />
-                  </div>
-                  <span className="text-base sm:text-lg text-gray-700 leading-relaxed">
-                    {item}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <div className="mb-6 p-4 sm:p-5 bg-white/80 rounded-xl border-2 border-ua-blue/10 shadow-sm">
-              <p className="text-base sm:text-lg text-gray-700">
-                <span className="font-medium">{p.hero.phoneLabel}</span>{' '}
-                <a
-                  href={`tel:${POLAND_PHONE.tel}`}
-                  className="font-semibold text-ua-blue hover:underline underline-offset-4 break-all"
-                >
-                  {POLAND_PHONE.display}
-                </a>
-              </p>
-              <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-base">
-                <a
-                  href={POLAND_PHONE.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-ua-blue hover:underline underline-offset-4"
-                >
-                  WhatsApp
-                </a>
-                <a
-                  href={POLAND_PHONE.telegram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-ua-blue hover:underline underline-offset-4"
-                >
-                  Telegram
-                </a>
-              </div>
-            </div>
-            <Button
-              onClick={scrollToContact}
-              size="lg"
-              className="bg-ua-blue hover:bg-ua-blue/90 text-white font-semibold px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
-            >
-              {p.hero.cta}
-            </Button>
-            </div>
-            <div className="hidden lg:block" aria-hidden />
-          </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 via-white to-white" />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
+            {t.polandHeroShort?.title ?? p.hero.headline}
+          </h1>
+          <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-8 text-lg sm:text-xl text-gray-600">
+            <li className="flex items-center gap-2">
+              <Check size={20} className="text-ua-blue flex-shrink-0" />
+              {t.polandHeroShort?.subtitle1 ?? 'обучение'}
+            </li>
+            <li className="flex items-center gap-2">
+              <Check size={20} className="text-ua-blue flex-shrink-0" />
+              {t.polandHeroShort?.subtitle2 ?? 'экзамены'}
+            </li>
+            <li className="flex items-center gap-2">
+              <Check size={20} className="text-ua-blue flex-shrink-0" />
+              {t.polandHeroShort?.subtitle3 ?? 'сопровождение'}
+            </li>
+          </ul>
+          <Button
+            onClick={scrollToContact}
+            size="lg"
+            className="bg-ua-blue hover:bg-ua-blue/90 text-white font-semibold px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
+          >
+            {t.polandHeroShort?.cta ?? p.hero.cta}
+          </Button>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
       </section>
@@ -178,6 +139,21 @@ export function PolandPageContent({ locale, t }: PolandPageContentProps) {
               {p.cta.telegram}
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* Internal linking: had Ukraine license */}
+      <section className="py-12 sm:py-16 bg-amber-50/50 border-b border-amber-100">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
+            {t.hadUkraine?.title ?? 'Если у вас уже были права Украины'}
+          </h2>
+          <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-6">
+            {t.hadUkraine?.text ?? 'Возможно, вам не нужно получать права заново. Посмотрите услугу замены или восстановления водительского удостоверения.'}
+          </p>
+          <Button asChild variant="outline" size="lg" className="border-2 border-ua-blue text-ua-blue hover:bg-ua-blue/5 font-semibold">
+            <a href="/">{t.hadUkraine?.button ?? 'На главную'}</a>
+          </Button>
         </div>
       </section>
 
@@ -439,7 +415,7 @@ export function PolandPageContent({ locale, t }: PolandPageContentProps) {
             </Button>
           </div>
           <p className="text-sm text-gray-500 mb-4">{p.cta.micro}</p>
-          <p className="text-base sm:text-lg font-medium text-gray-700">
+          <p className="text-base sm:text-lg font-medium text-gray-700 mb-4">
             {p.cta.phoneLabel}{' '}
             <a
               href={`tel:${POLAND_PHONE.tel}`}
@@ -448,6 +424,9 @@ export function PolandPageContent({ locale, t }: PolandPageContentProps) {
               {POLAND_PHONE.display}
             </a>
           </p>
+          <div className="flex justify-center">
+            <ContactIcons />
+          </div>
         </div>
       </section>
 
